@@ -19,12 +19,14 @@ def push(elem: Any) -> None:
 
 def pop() -> Any:
     """
-    Pop element from the top of the stack. If not elements - should return None.
+    Pop element from the top of the stack.
+    If not elements - should return None.
 
     :return: popped element
     """
-    last_elem = my_stack.pop()
-    return last_elem
+    if my_stack:
+        last_elem = my_stack.pop()
+        return last_elem
 
 
 def peek(ind: int = 0) -> Any:
