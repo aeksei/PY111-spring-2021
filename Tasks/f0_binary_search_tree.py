@@ -33,7 +33,7 @@ def insert(key: int, value: Any) -> None:
     global tree
 
     def recursion_insert(current_node: dict):
-        if key > current_node["key"]:
+        if key > current_node["key"]:  # идем в правое поддерево
             if not current_node["right"]:  # дошли до листа
                 current_node["right"] = create_node(key, value)
             else:
@@ -70,8 +70,24 @@ def find(key: int) -> Optional[Any]:
     :param key: key for search in the BST
     :return: value associated with the corresponding key
     """
-    print(key)
-    return None
+    def recursion_find(current_node):
+        if key > current_node["key"]:  # идем в правое поддерево
+            if not current_node["right"]:  # дошли до листа
+                raise KeyError
+            else:
+                return recursion_find(current_node["right"])
+        elif key < current_node["key"]:  # идем в левое поддерево
+            if not current_node["left"]:  # дошли до листа
+                raise KeyError
+            else:
+                return recursion_find(current_node["left"])
+        elif key == current_node["key"]:
+            return current_node["value"]
+
+    if not tree:
+        raise KeyError
+    else:
+        return recursion_find(tree)
 
 
 def clear() -> None:
